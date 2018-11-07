@@ -1,0 +1,99 @@
+/**
+ * Created by cxu on 31/05/2017.
+ */
+
+.THIS .spinnerContainer {
+    z-index: 10000;
+    height: 32px;
+    width: 32px;
+    margin: 0 auto;
+}
+
+/***************** Original code below *******************/
+
+.THIS .progress-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 655px) {
+    /* for wide screen */
+    .THIS .progress-container{
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+}
+@media screen and (max-width: 654px) {
+    /* for narrow screen */
+    .THIS .progress-container{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .THIS .full-width {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px) and (min-width: 655px) {
+    .THIS .benefits,
+    .THIS .requirements {
+        max-width: 300px;
+    }
+}
+
+.THIS .circle {
+    width: 150px;
+    margin: 6px 6px 20px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.THIS .circle canvas {
+    vertical-align: top;
+}
+
+.THIS .circle strong {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.THIS .chart-number {
+    font-size: 50px;
+    width: 110px;
+    margin: 0 auto;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.THIS .chart-number + p {
+    text-overflow: ellipsis;
+    width: 100px;
+    margin: auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.THIS .requirement {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.THIS .success svg {
+    fill: green;
+}
+
+.THIS .benefits,
+.THIS .requirements,
+.THIS .circle {
+    flex-grow: 1;
+}

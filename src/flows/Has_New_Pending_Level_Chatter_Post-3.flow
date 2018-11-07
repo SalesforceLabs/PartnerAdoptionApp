@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>NewPendingLevelChatterPost</name>
+        <label>NewPendingLevelChatterPost</label>
+        <locationX>416</locationX>
+        <locationY>352</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>AccountId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>NewPendingLevelTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>NewFeedItemId</assignToReference>
+            <name>feedItemId</name>
+        </outputParameters>
+    </actionCalls>
+    <description>Flow used to create a Chatter post following the process of &apos;Partner Program Update&apos;</description>
+    <interviewLabel>New {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Has New Pending Level Chatter Post</label>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>NewPendingLevelChatterPost</startElementReference>
+    <textTemplates>
+        <name>NewPendingLevelTemplate</name>
+        <text>@[{!ThisAccount.OwnerId}], this partner account does not meet the criteria to stay at {!CurrentLevelName} level of the {!ThisProgramName} program anymore.
+If criteria are not met within the next 7 days, they will be downgraded to {!PendingLevelName} level.</text>
+    </textTemplates>
+    <variables>
+        <name>AccountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CurrentLevelName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>NewFeedItemId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>PendingLevelName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ThisAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>ThisProgramName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

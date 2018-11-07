@@ -1,0 +1,21 @@
+<!--
+    Author:         Derrick Vuong
+    Company:        Salesforce
+    Description:    PartnerTierCurrentLevel.cmp
+    Date:           2-Nov-2018
+-->
+<aura:component >
+    <aura:attribute name="availableProgramMembers" type="ChannelProgramMember[]" ></aura:attribute>
+    <aura:attribute name="numberOfPrograms" type="Integer" ></aura:attribute>
+    
+    <aura:registerEvent name="programPickerEvent" type="c:PartnerTierProgramPickerEvent"/>
+    <aura:handler event="c:PartnerTierProgramPickerEvent" action="{!c.handleProgramPicker}"/>
+    
+    <aura:if isTrue="{!v.numberOfPrograms > 1}">
+        <ui:inputSelect aura:id="channelProgramsSelect" label="Your Channel Programs" change="{!c.onProgramSelect}">
+            <aura:iteration items="{!v.availableProgramMembers}" var="member">
+                <ui:inputSelectOption text="{!member.ProgramId}" label="{!member.Program.Name}"/>
+            </aura:iteration>
+        </ui:inputSelect>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,117 @@
+<!--
+    Author:         Derrick Vuong
+    Company:        Salesforce
+    Description:    PartnerTierCurrentLevel.cmp
+    Date:           2-Nov-2018
+-->
+<aura:component description="PartnerAdoptionProgression"  implements="forceCommunity:availableForAllPageTypes"
+                controller="PartnerTierCommunityController" access="global">
+
+    <aura:attribute name="availableProgramMembers" type="ChannelProgramMember[]" ></aura:attribute>
+    <aura:attribute name="numberOfPrograms" type="Integer" ></aura:attribute>
+    <aura:attribute name="selectedProgramMember" type="ChannelProgramMember"></aura:attribute>
+    <aura:attribute name="activityTypeMap" type="Map"></aura:attribute>
+    <aura:attribute name="requirements" type="DV_PAA__Partner_Level_Requirement__c[]"></aura:attribute>
+    <aura:attribute name="displayBenefits" type="boolean" access="global"></aura:attribute>
+    <aura:attribute name="chartColour" type="String" access="global"></aura:attribute>
+    <aura:attribute name="showProgramPicker" type="boolean" default="true" access="global"></aura:attribute>
+
+    <ltng:require scripts="{! join(',',
+            $Resource.DV_PAA__circularProgress + '/jquery.min.js',
+            $Resource.DV_PAA__circularProgress + '/circle-progress.min.js'
+            )}"  afterScriptsLoaded="{!c.doInit}"/>
+
+    <aura:handler name="change" value="{!v.selectedProgramMember}" action="{!c.handleProgramChange}"/>
+    <aura:handler event="c:PartnerTierProgramPickerEvent" action="{!c.handleProgramPicker}"/>
+    
+    <!--<aura:handler event="aura:waiting" action="{!c.toggleSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.toggleSpinner}"/>-->
+
+    <div class="slds-box slds-box--medium ">
+        <h2 class="full-width slds-p-left--x-small">
+            <span class="slds-text-heading--small">{!$Label.c.Progress}</span>
+        </h2>
+		
+        <aura:if isTrue="{!v.showProgramPicker}">
+            <div class="slds-m-top_small slds-m-bottom_small slds-m-left_x-small">
+                <c:PartnerTierProgramPicker availableProgramMembers="{!v.availableProgramMembers}" numberOfPrograms="{!v.numberOfPrograms}" />
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!or(v.selectedProgramMember == null, v.selectedProgramMember.Level == null)}" >
+            <p class="slds-text-heading--label  slds-p-around--x-small slds-text-color--error">
+                You are not a partner user, this is a preview
+            </p>
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.selectedProgramMember.Level.DV_PAA__Next_Level__c == null, v.selectedProgramMember != null, v.selectedProgramMember.Level != null)}">
+            <p class="slds-text-heading--label slds-p-around_x-small">{!$Label.c.Highest_Level_Message}</p>
+        </aura:if>
+
+        <div class="progress-container" id="progress-content">
+            <div id="circle" class="circle" aura:id="circle">
+                <!--<div class="spinnerContainer slds-hide" aura:id="spinnerContainer"><ui:spinner aura:id="spinner"/></div>-->
+                <strong></strong>
+            </div>
+
+            <aura:if isTrue="{!or(v.selectedProgramMember == null, v.selectedProgramMember.Level == null)}" >
+
+                <div class="requirements full-width ">
+                    <p class="slds-text-heading--label slds-p-top--medium full-width slds-p-left--large">{!$Label.c.Next_Level_Requirements}</p>
+                    <div class="requirement slds-p-top--x-small">
+                        <lightning:icon iconName="utility:check" size="x-small" class="success slds-p-right--x-small"/>
+                        <p class="requirement-text">
+                        Sample requirement 1 (20/20 points)
+                        </p>
+                    </div>
+                    <div class="requirement slds-p-top--x-small">
+                        <div class="slds-p-left--large"></div>
+                        <p class="requirement-text">
+                            Sample requirement 2 (10/20 points)
+                        </p>
+                    </div>
+                </div>
+
+                <aura:if isTrue="{!v.displayBenefits}">
+                    <div class="benefits full-width slds-p-left--large">
+                        <p class="slds-text-heading--label slds-p-top--medium full-width">{!$Label.c.Next_Level_Benefits}</p>
+                        <p class="full-width slds-p-top--small">
+                            Sample Benefit 1 this is a benefit<br/>
+                            Sample Benefit 2 this is a benefit<br/>
+                            Sample Benefit 3 this is a benefit
+                        </p>
+                    </div>
+                </aura:if>
+            </aura:if>
+
+            <aura:if isTrue="{!v.requirements.length > 0}">
+                <div class="requirements full-width ">
+                    <p class="slds-text-heading--label slds-p-top--medium full-width slds-p-left--large">{!$Label.c.Next_Level_Requirements}</p>
+                    <aura:iteration items="{!v.requirements}" var="requirement">
+                        <div class="requirement slds-p-top--x-small">
+                            <aura:if isTrue="{!requirement.Fulfilled}">
+                                <lightning:icon iconName="utility:check" size="x-small" class="success slds-p-right--x-small"/>
+                                <aura:set attribute="else">
+                                    <div class="slds-p-left--large"></div>
+                                </aura:set>
+                            </aura:if>
+                            <p class="requirement-text">
+                            {!requirement.Name} ({!requirement.CurrentPoints}/{!requirement.DV_PAA__Minimum_Point_Requirement__c} {!' ' + $Label.c.Points})
+                            </p>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </aura:if>
+
+            <aura:if isTrue="{!and(v.selectedProgramMember != null, v.selectedProgramMember.Level != null)}" >
+
+                <aura:if isTrue="{!and(v.displayBenefits, v.selectedProgramMember.Level.DV_PAA__Next_Level__c != null)}">
+                    <div class="benefits full-width slds-p-left--large">
+                        <p class="slds-text-heading--label slds-p-top--medium full-width">{!$Label.c.Next_Level_Benefits}</p>
+                        <ui:outputRichText value="{!v.selectedProgramMember.Level.DV_PAA__Next_Level__r.DV_PAA__Benefits__c}" class="full-width slds-p-top--small" />
+                    </div>
+                </aura:if>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

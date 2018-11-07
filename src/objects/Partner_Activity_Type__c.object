@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Partner_Activity_Type_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>false</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>false</enableSharing>
+    <enableStreamingApi>false</enableStreamingApi>
+    <fields>
+        <fullName>Automatic_Expiry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Points awarded from the account activities of this type will expire</inlineHelpText>
+        <label>Automatic Expiry</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Category_Icon_URL__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( Category__c ,&apos;Sales&apos;, &apos;/resource/ActivityCategoryIcons/sales.svg&apos;, &apos;Service&apos;, &apos;/resource/ActivityCategoryIcons/service.svg&apos;, &apos;Conference&apos;, &apos;/resource/ActivityCategoryIcons/conference.svg&apos;, &apos;Certification&apos;, &apos;/resource/ActivityCategoryIcons/certificate.svg&apos;, &apos;&apos;)</formula>
+        <label>Category Icon URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Category_Icon__c</fullName>
+        <externalId>false</externalId>
+        <formula>IMAGE( Category_Icon_URL__c ,&apos;Category Icon&apos;, 35, 35)</formula>
+        <label>Category Icon</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Certification</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Conference</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Sales</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Service</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Expiry_Period__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>How many days do points from this activity type expires</inlineHelpText>
+        <label>Expiry Period (Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Points__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the default amount gained from an Activity. Different point values can be assigned to specific programs and levels through the Program Level Activity Point Association related list</inlineHelpText>
+        <label>Points</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Valid_From__c</fullName>
+        <defaultValue>TODAY()</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Valid from this date</inlineHelpText>
+        <label>Valid From</label>
+        <required>true</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Valid_Until__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Any activities of this type after the &quot;Valid Until&quot; date will not have any points. If you don&apos;t wish to have a &quot;Valid Until&quot; date simply leave this field empty</inlineHelpText>
+        <label>Valid Until</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Partner Activity Type</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Category__c</columns>
+        <columns>Category_Icon__c</columns>
+        <columns>Description__c</columns>
+        <columns>Automatic_Expiry__c</columns>
+        <columns>Expiry_Period__c</columns>
+        <columns>Points__c</columns>
+        <columns>Valid_From__c</columns>
+        <columns>Valid_Until__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Partner Activity Type Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Partner Activity Types</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Expiry_Period_Required</fullName>
+        <active>true</active>
+        <description>Expiry period field is required when &quot;Automatica Expiry&quot; field is checked</description>
+        <errorConditionFormula>AND(Automatic_Expiry__c = true, OR(ISNULL(Expiry_Period__c), Expiry_Period__c &lt; 0) )</errorConditionFormula>
+        <errorDisplayField>Expiry_Period__c</errorDisplayField>
+        <errorMessage>You have to input a valid expiry period when this activity is an automatic expiry type</errorMessage>
+    </validationRules>
+</CustomObject>

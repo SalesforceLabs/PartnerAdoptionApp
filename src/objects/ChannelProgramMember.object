@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Pending_Level__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Level downgrade in pending</inlineHelpText>
+        <label>Pending Level</label>
+        <referenceTo>ChannelProgramLevel</referenceTo>
+        <relationshipLabel>Member Accounts (Pending Level)</relationshipLabel>
+        <relationshipName>Pending_Level_Members</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Points_to_Next_Level__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (Level.Next_Level_Point_Requirement__c &lt; Total_Partner_Points__c, 0, Level.Next_Level_Point_Requirement__c - Total_Partner_Points__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Points to Next Level</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Partner_Points__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Leave this empty when changing levels and it will automatically assign the minimum points requirement of that level</inlineHelpText>
+        <label>Total Partner Points</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

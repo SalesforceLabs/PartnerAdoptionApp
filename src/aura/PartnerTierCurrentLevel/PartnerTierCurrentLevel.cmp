@@ -1,0 +1,94 @@
+<!--
+    Author:         Derrick Vuong
+    Company:        Salesforce
+    Description:    PartnerTierCurrentLevel.cmp
+    Date:           2-Nov-2018
+-->
+<aura:component description="PartnerAdoptionCurrentLevel" implements="forceCommunity:availableForAllPageTypes" controller="PartnerTierCommunityController" access="global">
+    <aura:handler value="{!this}" name="init" action="{!c.doInit}"></aura:handler>
+    <aura:handler event="c:PartnerTierProgramPickerEvent" action="{!c.handleProgramPicker}"/>
+	
+    <aura:attribute name="availableProgramMembers" type="ChannelProgramMember[]" ></aura:attribute>
+    <aura:attribute name="numberOfPrograms" type="Integer" ></aura:attribute>
+    <aura:attribute name="selectedProgramMember" type="ChannelProgramMember"></aura:attribute>
+    <aura:attribute name="levelIcon" type="String" default="http://placehold.it/150x150"></aura:attribute>
+    <aura:attribute name="displayBenefits" type="boolean" access="global"></aura:attribute>
+    <aura:attribute name="displayDowngradeWarning" type="boolean" access="global"></aura:attribute>
+    <aura:attribute name="showProgramPicker" type="boolean" default="true" access="global"></aura:attribute>
+
+    <div class="slds-box slds-box--medium">
+        <aura:if isTrue="{!v.showProgramPicker}">
+            <c:PartnerTierProgramPicker availableProgramMembers="{!v.availableProgramMembers}" numberOfPrograms="{!v.numberOfPrograms}" />
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.selectedProgramMember != null, v.selectedProgramMember.Pending_Level__c != null, v.displayDowngradeWarning)}" >
+            <div class="slds-notify slds-notify--alert slds-theme--alert-texture slds-theme--warning" role="alert">
+                <span class="slds-assistive-text">warning</span>
+                <lightning:icon iconName="utility:warning" size="x-small" class="slds-m-right--x-small icon" />
+                <p class="slds-text-body--regular">
+                    {!$Label.c.Downgrade_Message}
+                </p>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{!and(v.selectedProgramMember != null, v.selectedProgramMember.Level != null)}" >
+
+            <div class="level-content  slds-p-top--small">
+                <img src="{!or(v.levelIcon == null, v.levelIcon == '') ? $SfdcSite.pathPrefix + '/resource/CPL_PlaceholderIcon' : v.levelIcon}" class="level-icon full-width"/>
+                <div class="level-info-container full-width slds-p-top--large">
+                    <div class="level-info-item">
+                        <p class="slds-text-heading--label">{!$Label.c.Partner_Level}</p>
+                        <p class="slds-text-heading--large slds-line-height_reset slds-p-top--small">
+                            {!v.selectedProgramMember.Level.Name}
+                        </p>
+                    </div>
+                    <div class="level-info-item ">
+                        <p class="slds-text-heading--label">{!$Label.c.Partner_Points}</p>
+                        <p class="slds-text-heading--large slds-line-height_reset slds-p-top--small">
+                            {!v.selectedProgramMember.Total_Partner_Points__c}
+                        </p>
+                    </div>
+                </div>
+                <aura:if isTrue="{!v.displayBenefits}">
+                    <div class="level-benefit full-width slds-p-top_large">
+                        <p class="slds-text-heading--label">{!$Label.c.Current_Level_Benefits}</p>
+                        <ui:outputRichText value="{!v.selectedProgramMember.Level.Benefits__c}" class=" slds-p-top--small"/>
+                    </div>
+                </aura:if>
+            </div>
+            <aura:set attribute="else">
+                <p class="slds-text-heading--label  slds-p-bottom--large slds-text-color--error">
+                    You are not a partner user, this is a preview
+                </p>
+
+                <div class="level-content  slds-p-top--small">
+                    <img src="{!v.levelIcon}" class="level-icon full-width"/>
+                    <div class="level-info-container full-width slds-p-top--large">
+                        <div class="level-info-item">
+                            <p class="slds-text-heading--label">{!$Label.c.Partner_Level}</p>
+                            <p class="slds-text-heading--large slds-line-height_reset slds-p-top--small">
+                                Sample
+                            </p>
+                        </div>
+                        <div class="level-info-item ">
+                            <p class="slds-text-heading--label">{!$Label.c.Partner_Points}</p>
+                            <p class="slds-text-heading--large slds-line-height_reset slds-p-top--small">
+                                100
+                            </p>
+                        </div>
+                    </div>
+                    <aura:if isTrue="{!v.displayBenefits}">
+                        <div class="level-benefit full-width slds-p-top--large">
+                            <p class="slds-text-heading--label">{!$Label.c.Current_Level_Benefits}</p>
+                            <p class="slds-p-top--small">
+                                Sample Benefit 1 this is a benefit<br/>
+                                Sample Benefit 2 this is a benefit<br/>
+                                Sample Benefit 3 this is a benefit
+                            </p>
+                        </div>
+                    </aura:if>
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,10 @@
+<!--
+ - Modified by dvuong on 18/04/2018
+ - Created by cxu on 31/05/2017.
+ -->
+
+<design:component label="Partner Adoption Progress Info">
+    <design:attribute name="showProgramPicker" label="Display Program Picker"></design:attribute>
+    <design:attribute name="displayBenefits" label="Display Next Level Benefits" default="true"></design:attribute>
+    <design:attribute name="chartColour" label="Progress Chart Colour" default="#0097E1"></design:attribute>
+</design:component>

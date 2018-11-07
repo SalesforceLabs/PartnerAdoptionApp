@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Benefits__c</fullName>
+        <externalId>false</externalId>
+        <label>Benefits</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Icon_URL__c</fullName>
+        <defaultValue>&quot;https://placeholdit.imgix.net/~text?txtsize=28&amp;txt=300%C3%97300&amp;w=300&amp;h=300&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Icon URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Minimum_Points__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Minimum Points</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Next_Level_Point_Requirement__c</fullName>
+        <externalId>false</externalId>
+        <formula>Next_Level__r.Minimum_Points__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Next Level Point Requirement</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Next_Level__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Next Level</label>
+        <referenceTo>ChannelProgramLevel</referenceTo>
+        <relationshipLabel>Channel Program Levels</relationshipLabel>
+        <relationshipName>Channel_Program_Levels</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>
