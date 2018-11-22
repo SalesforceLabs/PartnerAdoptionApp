@@ -1,8 +1,8 @@
 <!--
-    Author:         Derrick Vuong
-    Company:        Salesforce
-    Description:    PartnerTierCurrentLevel.cmp
-    Date:           2-Nov-2018
+* Copyright (c) 2018, salesforce.com, inc.
+* All rights reserved.
+* SPDX-License-Identifier: BSD-3-Clause
+* For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
 -->
 <aura:component description="PartnerAdoptionCurrentLevel" implements="forceCommunity:availableForAllPageTypes" controller="PartnerTierCommunityController" access="global">
     <aura:handler value="{!this}" name="init" action="{!c.doInit}"></aura:handler>

@@ -1,2 +1,19 @@
-.THIS {
+/*
+ * Copyright (c) 2018, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+.THIS .transparent-background {
+    background: transparent;
+}
+
+.THIS .table-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.THIS div[title="Type"] {
+    white-space: initial;
 }

@@ -1,8 +1,3 @@
-<!--
- - Modified by dvuong on 18/04/2018
- - Created by cxu on 31/05/2017.
- -->
-
 <design:component label="Partner Adoption Current Level">
     <design:attribute name="showProgramPicker" label="Display Program Picker"></design:attribute>
     <design:attribute name="displayBenefits" label="Display Current Level Benefits" default="true"></design:attribute>

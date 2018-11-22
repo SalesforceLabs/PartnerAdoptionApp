@@ -1,3 +1,123 @@
-<aura:component >
-	
+<!--
+ * Copyright (c) 2018, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+-->
+<aura:component description="PartnerAdoptionFeaturedActivities" implements="forceCommunity:availableForAllPageTypes"
+                controller="PartnerTierCommunityController" access="global">
+    <aura:attribute name="availableProgramMembers" type="ChannelProgramMember[]" ></aura:attribute>
+    <aura:attribute name="numberOfPrograms" type="Integer" ></aura:attribute>
+    <aura:attribute name="selectedProgramMember" type="ChannelProgramMember"></aura:attribute>
+    <aura:attribute name="activityTypes" type="Program_Level_Activity_Point_Association__c[]"></aura:attribute>
+    <aura:attribute name="showProgramPicker" type="boolean" default="true" access="global"></aura:attribute>
+    
+    <aura:handler value="{!this}" name="init" action="{!c.doInit}"></aura:handler>
+    <aura:handler name="change" value="{!v.selectedProgramMember}" action="{!c.handleProgramChange}"/>
+    <aura:handler event="c:PartnerTierProgramPickerEvent" action="{!c.handleProgramPicker}"/>
+    
+    <aura:if isTrue="{!and(v.selectedProgramMember != null, v.selectedProgramMember.Level != null)}" >
+        <lightning:card class="transparent-background">
+            <aura:set attribute="title">
+                {!$Label.c.Featured_Activity_Title}
+            </aura:set>
+            <aura:if isTrue="{!v.showProgramPicker}">
+                <div class="slds-p-left_medium slds-p-right_medium slds-p-bottom_medium">
+                    <c:PartnerTierProgramPicker availableProgramMembers="{!v.availableProgramMembers}" numberOfPrograms="{!v.numberOfPrograms}" />
+                </div>
+            </aura:if>
+            <table class="slds-table point-table slds-table--cell-buffer slds-cell-wrap">
+                <thead>
+                    <tr class="slds-text-title--caps slds-border--top slds-border--bottom">
+                        <th scope="col">
+                            <div class="slds-truncate" title="Type">{!$Label.c.Activity_Type}</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Category">{!$Label.c.Category}</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Points Awarded">{!$Label.c.Points}</div>
+                        </th>
+                    </tr>
+                </thead>
+                <aura:if isTrue="{!v.activityTypes != null}">
+                    <aura:iteration items="{!v.activityTypes}" var="activityType">
+                        <tr class="slds-hint-parent">
+                            <td>
+                                <div class="slds-truncate" title="Type">
+                                    {!activityType.Partner_Activity_Type__r.Name}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Category">
+                                    <img src="{! $SfdcSite.pathPrefix + activityType.Partner_Activity_Type__r.Category_Icon_URL__c}" class="table-icon"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Points Awarded"><ui:outputNumber value="{!activityType.Points__c}"/></div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                    <aura:set attribute="else">
+                        <tr class="slds-hint-parent">
+                            <td>
+                                <div class="slds-truncate" title="Type">
+                                    No featured activities for this Program Level currently
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Category">
+                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Points Awarded"></div>
+                            </td>
+                        </tr>
+                    </aura:set>
+                </aura:if>
+            </table>
+        </lightning:card>
+        <aura:set attribute="else">
+            <lightning:card class="transparent-background">
+                
+                <aura:set attribute="title">
+                    {!$Label.c.Featured_Activity_Title}
+                </aura:set>
+                <p class="slds-text-heading--label  slds-p-bottom--large slds-text-color--error slds-p-left_medium slds-p-right_medium">
+                    You are not a partner user, this is a preview
+                </p>
+                <table class="slds-table point-table slds-table--cell-buffer slds-cell-wrap">
+                    <thead>
+                        <tr class="slds-text-title--caps slds-border--top slds-border--bottom">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Type">{!$Label.c.Activity_Type}</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Category">{!$Label.c.Category}</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Points Awarded">{!$Label.c.Points}</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tr class="slds-hint-parent">
+                        <td>
+                            <div class="slds-truncate" title="Type">
+                                Sample Activity Type
+                            </div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate" title="Category">
+                                Sample Icon
+                            </div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate" title="Points Awarded">10</div>
+                        </td>
+                    </tr>
+                </table>
+            </lightning:card>
+        </aura:set>
+    </aura:if>
 </aura:component>
