@@ -1,6 +1,11 @@
 # Partner Adoption App
-<a href="https://githubsfdeploy.herokuapp.com">
-  <img alt="Deploy to Salesforce"
-       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
-</a>
-This app is used to support the on-boarding and progression of Partners via the Channel Program data model in a Gamified way. Through custom processes they can set what specific activities earns points and reaching the threshold, the member can level.
+<div>
+    <a href="https://githubsfdeploy.herokuapp.com?owner=DerrrickV&repo=SalesforceLabs&ref=PartnerAdoptionApp">
+        <img alt="Deploy to Salesforce"
+        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+    </a>
+</div>
+The Partner Adoption App helps measure and motivate partners with a configurable points based reward system for Channel Program Levels. It allows custom activities and thresholds to be defined for each program level, and partner promoting across levels.
+
+## Documentation
+- [Getting Started with the Partner Adoption App] (https://appexchange.salesforce.com/servlet/servlet.FileDownload?file=00P3A00000g0O0xUAE)
