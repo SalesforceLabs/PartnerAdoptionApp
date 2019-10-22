@@ -3,6 +3,7 @@ public with sharing class FLSCheck {
         return checkFieldLevelSecurity(objectType.fields.getMap(), fields, checkType);
     }
 
+    
     private static boolean checkFieldLevelSecurity(Map<String,Schema.SObjectField> fieldMap, List<string> fields, string checkType) {
         boolean ret = false;
         for (String fieldToCheck : fields) {
